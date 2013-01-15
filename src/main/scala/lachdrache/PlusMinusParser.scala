@@ -2,7 +2,7 @@ package lachdrache
 
 import util.parsing.combinator.JavaTokenParsers
 
-class DurationParser extends JavaTokenParsers {
+class PlusMinusParser extends JavaTokenParsers {
 
   def expr: Parser[Int] = targetActual <~ comment
 

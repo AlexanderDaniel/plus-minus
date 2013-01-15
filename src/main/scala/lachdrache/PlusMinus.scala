@@ -6,7 +6,7 @@ import io.{BufferedSource, Source}
 object PlusMinus {
 
   def main(args: Array[String]) {
-    val durationParser = new DurationParser
+    val durationParser = new PlusMinusParser
     val file: BufferedSource = Source.fromFile(args(0))
     val result = file.getLines().map(line => (durationParser(line), line)).toList
     val sum = result.map(_._1).sum
