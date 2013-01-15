@@ -22,6 +22,10 @@ class PlusMinusParserSuite extends FunSuite {
     assert(30 === plusMinus("5d 39h0m"))
   }
 
+  test("worked one hour less that the target") {
+    assert(-60 === plusMinus("5d 37h30m"))
+  }
+
   test("with optional comment") {
     assert(30 === plusMinus("5d 39h0m  # comment"))
   }
