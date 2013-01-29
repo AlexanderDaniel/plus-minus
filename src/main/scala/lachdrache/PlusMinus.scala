@@ -16,10 +16,10 @@ object PlusMinus {
     println("%4d = %s = %.2f".format(sum, formatMinutes(sum), formatMinutesAsDecimal(sum)))
   }
 
-  private def formatMinutes(input: Int): String = {
+  private[lachdrache] def formatMinutes(input: Int): String = {
     val hours = input / 60
     val minutes = input % 60
-    "%dh%dm".format(hours, minutes)
+    s"${hours}h${minutes}m"
   }
 
   private def formatMinutesAsDecimal(input: Int): Double = {
