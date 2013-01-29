@@ -6,13 +6,13 @@ class PlusMinusParser extends JavaTokenParsers {
 
   def expr: Parser[Int] = targetActual <~ comment
 
-  def targetActual: Parser[Int] = duration ~ duration ^^ { x => x._2 - x._1 }
+  def targetActual: Parser[Int] = duration ~ duration ^^ { case target~actual => actual-target }
   def comment: Parser[String] = """.*""".r
 
-  def duration: Parser[Int] = hourMinute | day
+  def duration: Parser[Int] = day | hourMinute
 
   def day: Parser[Int] = wholeNumber<~"d" ^^ { days => days.toInt*MinutesPerDay}
-  def hourMinute: Parser[Int] = hour~minute ^^ { x => x._1*60 + x._2 }
+  def hourMinute: Parser[Int] = hour~minute ^^ { case h~m => h*60 + m }
   def hour: Parser[Int] = wholeNumber<~"h" ^^ { _.toInt }
   def minute: Parser[Int] = wholeNumber<~"m" ^^ { _.toInt }
 
