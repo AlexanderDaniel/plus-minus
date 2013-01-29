@@ -13,7 +13,7 @@ object PlusMinus {
 
     result.foreach(r => println("%4d - %s".format(r._1, r._2)))
     println("====")
-    println("%4d = %s = %.2f".format(sum, formatMinutes(sum), formatMinutesAsDecimal(sum)))
+    println("%4d = %s = %.2f".format(sum, formatMinutes(sum), minutesAsDecimal(sum)))
   }
 
   private[lachdrache] def formatMinutes(input: Int): String = {
@@ -22,7 +22,7 @@ object PlusMinus {
     s"${hours}h${minutes}m"
   }
 
-  private def formatMinutesAsDecimal(input: Int): Double = {
+  private def minutesAsDecimal(input: Int): Double = {
     input.toDouble / 60.0
   }
 
