@@ -6,23 +6,25 @@ import io.{BufferedSource, Source}
 object PlusMinus {
 
   def main(args: Array[String]) {
-    val durationParser = new PlusMinusParser
     val file: BufferedSource = Source.fromFile(args(0))
-    val result = file.getLines().map(line => (durationParser(line), line)).toList
-    val sum = result.map(_._1).sum
-
-    result.foreach(r => println("%4d - %s".format(r._1, r._2)))
-    println("====")
-    println("%4d = %s = %.2f".format(sum, formatMinutes(sum), minutesAsDecimal(sum)))
+    generateOutput(file.getLines().toVector) foreach println
   }
 
-  private[lachdrache] def formatMinutes(input: Int): String = {
-    val hours = input / 60
-    val minutes = input % 60
-    s"${hours}h${minutes}m"
+  def generateOutput(input: Vector[String]): Vector[String] = {
+    val durationParser = new PlusMinusParser
+    val plusMinusPerDay = input map (line => durationParser(line))
+    val sum = plusMinusPerDay.sum
+    val output = plusMinusPerDay zip input map {
+      case (minutes, line) => "%4d - %s".format(minutes, line)
+    }
+    output :+ "====" :+ "%4d = %s = %.2f".format(sum, formatMinutes(sum), minutesAsDecimal(sum))
   }
 
-  private def minutesAsDecimal(input: Int): Double = {
+  def formatMinutes(input: Int): String = {
+    s"${input / 60}h${input % 60}m"
+  }
+
+  def minutesAsDecimal(input: Int): Double = {
     input.toDouble / 60.0
   }
 

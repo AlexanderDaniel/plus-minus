@@ -2,6 +2,7 @@ package lachdrache
 
 import org.scalatest.FunSuite
 import PlusMinus.formatMinutes
+import PlusMinus.generateOutput
 
 class PlusMinusSuite extends FunSuite {
 
@@ -9,6 +10,36 @@ class PlusMinusSuite extends FunSuite {
     assert(formatMinutes(3) === "0h3m")
     assert(formatMinutes(60) === "1h0m")
     assert(formatMinutes(119) === "1h59m")
+  }
+
+  test("generateOutput with plus") {
+    val result = generateOutput(Vector("1d 8h0m"))
+    val expected = Vector(
+      "  18 - 1d 8h0m",
+      "====",
+      "  18 = 0h18m = 0,30"
+    )
+    assert(result === expected)
+  }
+
+  test("generateOutput with minus") {
+    val result = generateOutput(Vector("1d 7h0m"))
+    val expected = Vector(
+      " -42 - 1d 7h0m",
+      "====",
+      " -42 = 0h-42m = -0,70"
+    )
+    assert(result === expected)
+  }
+
+  test("generateOutput with minus (more than 1 hour)") {
+    val result = generateOutput(Vector("1d 6h0m"))
+    val expected = Vector(
+      "-102 - 1d 6h0m",
+      "====",
+      "-102 = -1h-42m = -1,70"
+    )
+    assert(result === expected)
   }
 
 }
