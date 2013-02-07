@@ -15,9 +15,9 @@ object PlusMinus {
     val plusMinusPerDay = input map (line => durationParser(line))
     val sum = plusMinusPerDay.sum
     val output = plusMinusPerDay zip input map {
-      case (minutes, line) => "%4d - %s".format(minutes, line)
+      case (minutes, line) => f"$minutes%4d - $line"
     }
-    output :+ "====" :+ "%4d = %s = %.2f".format(sum, formatMinutes(sum), minutesAsDecimal(sum))
+    output :+ "====" :+ f"$sum%4d = ${formatMinutes(sum)} = ${minutesAsDecimal(sum)}%.2f"
   }
 
   def formatMinutes(input: Int): String = {
