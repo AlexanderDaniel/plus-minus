@@ -11,10 +11,12 @@ class PlusMinusParser extends JavaTokenParsers {
 
   def duration: Parser[Int] = day | hourMinute
 
-  def day: Parser[Int] = wholeNumber<~"d" ^^ { days => days.toInt*MinutesPerDay}
+  def day: Parser[Int] = num<~"d" ^^ { days => days*MinutesPerDay}
   def hourMinute: Parser[Int] = hour~minute ^^ { case h~m => h*60 + m }
-  def hour: Parser[Int] = wholeNumber<~"h" ^^ { _.toInt }
-  def minute: Parser[Int] = wholeNumber<~"m" ^^ { _.toInt }
+  def hour: Parser[Int] = num<~"h"
+  def minute: Parser[Int] = num<~"m"
+
+  def num: Parser[Int] = wholeNumber ^^ { _.toInt }
 
   val MinutesPerDay = 7*60 + 42
 
