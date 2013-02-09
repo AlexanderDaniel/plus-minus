@@ -3,6 +3,7 @@ package lachdrache
 import org.scalatest.FunSuite
 import PlusMinus.formatMinutes
 import PlusMinus.generateOutput
+import java.text.NumberFormat
 
 class PlusMinusSuite extends FunSuite {
 
@@ -20,7 +21,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       "  18 - 1d 8h0m",
       "====",
-      "  18 = 0h18m = 0,30"
+      f"  18 = 0h18m = ${0.30}%.2f"
     )
     assert(result === expected)
   }
@@ -30,7 +31,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       " -42 - 1d 7h0m",
       "====",
-      " -42 = -0h42m = -0,70"
+      f" -42 = -0h42m = ${-0.70}%.2f"
     )
     assert(result === expected)
   }
@@ -40,7 +41,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       "-102 - 1d 6h0m",
       "====",
-      "-102 = -1h42m = -1,70"
+      f"-102 = -1h42m = ${-1.70}%.2f"
     )
     assert(result === expected)
   }
