@@ -21,6 +21,5 @@ class PlusMinusParser extends JavaTokenParsers {
   def apply(input :String):Int = parseAll(expr, input) match {
     case Success(result, _) => result
     case NoSuccess(msg, _) => throw new RuntimeException(msg)
-    case Failure(msg, _) => throw new RuntimeException(msg)
   }
 }
