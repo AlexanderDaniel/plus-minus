@@ -3,7 +3,6 @@ package lachdrache
 import org.scalatest.FunSuite
 import PlusMinus.formatMinutes
 import PlusMinus.generateOutput
-import java.text.NumberFormat
 
 class PlusMinusSuite extends FunSuite {
 
