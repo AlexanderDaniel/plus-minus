@@ -4,9 +4,9 @@ import util.parsing.combinator.JavaTokenParsers
 
 class PlusMinusParser extends JavaTokenParsers {
 
-  def expr: Parser[Int] = targetActual <~ comment
+  def expr: Parser[Line] = targetActual <~ comment
 
-  def targetActual: Parser[Int] = duration ~ duration ^^ { case target~actual => actual-target }
+  def targetActual: Parser[Line] = duration ~ duration ^^ { case target~actual => Line(target, actual, actual-target) }
   def comment: Parser[String] = """.*""".r
 
   def duration: Parser[Int] = day | hourMinute
@@ -20,7 +20,7 @@ class PlusMinusParser extends JavaTokenParsers {
 
   val MinutesPerDay = 7*60 + 42
 
-  def apply(input :String):Int = parseAll(expr, input) match {
+  def apply(input :String):Line = parseAll(expr, input) match {
     case Success(result, _) => result
     case NoSuccess(msg, _) => throw new RuntimeException(msg)
   }
