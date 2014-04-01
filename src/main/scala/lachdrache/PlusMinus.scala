@@ -12,12 +12,15 @@ object PlusMinus {
 
   def generateOutput(input: Vector[String]): Vector[String] = {
     val durationParser = new PlusMinusParser
-    val plusMinusPerDay = input map (line => durationParser(line)) map (_.plusMinus)
-    val sum = plusMinusPerDay.sum
+    val perDay = input map (line => durationParser(line))
+    val plusMinusPerDay = perDay map (line => line.plusMinus)
+    val sum = perDay.reduceLeft { (z, day) =>
+      z + day
+    }
     val output = plusMinusPerDay zip input map {
       case (minutes, line) => f"$minutes%4d - $line"
     }
-    output :+ "====" :+ f"$sum%4d = ${formatMinutes(sum)} = ${minutesAsDecimal(sum)}%.2f"
+    output :+ "====" :+ f"${sum.plusMinus}%4d = ${formatMinutes(sum.plusMinus)} = ${minutesAsDecimal(sum.plusMinus)}%.2f (${formatMinutes(sum.actual)} - ${formatMinutes(sum.target)})"
   }
 
   def formatMinutes(input: Int): String =

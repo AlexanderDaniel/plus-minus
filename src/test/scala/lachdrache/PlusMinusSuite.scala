@@ -20,7 +20,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       "  18 - 1d 8h0m",
       "====",
-      f"  18 = 0h18m = ${0.30}%.2f"
+      f"  18 = 0h18m = ${0.30}%.2f (8h0m - 7h42m)"
     )
     assert(result === expected)
   }
@@ -30,7 +30,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       " -42 - 1d 7h0m",
       "====",
-      f" -42 = -0h42m = ${-0.70}%.2f"
+      f" -42 = -0h42m = ${-0.70}%.2f (7h0m - 7h42m)"
     )
     assert(result === expected)
   }
@@ -40,7 +40,7 @@ class PlusMinusSuite extends FunSuite {
     val expected = Vector(
       "-102 - 1d 6h0m",
       "====",
-      f"-102 = -1h42m = ${-1.70}%.2f"
+      f"-102 = -1h42m = ${-1.70}%.2f (6h0m - 7h42m)"
     )
     assert(result === expected)
   }
